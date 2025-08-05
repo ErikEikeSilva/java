@@ -11,20 +11,20 @@ public class SimuladorBancario {
 	        boolean executando = true;
 
 	        while (executando) {
-	            System.out.println("\n╔══════════════════════════════╗");
-	            System.out.println("║ BEM-VINDO AO BANCO DIGITAL ║");
+	            System.out.println("\n╔════════════════════════════╗");
+	            System.out.println("║ BEM-VINDO AO BANCO DIGITAL   ║");
 	            System.out.println("╠══════════════════════════════╣");
-	            System.out.println("║ 1 - Consultar Saldo ║");
-	            System.out.println("║ 2 - Depositar Valor ║");
-	            System.out.println("║ 3 - Sacar Valor ║");
-	            System.out.println("║ 4 - Encerrar Atendimento ║");
+	            System.out.println("║ 1 - Consultar Saldo          ║");
+	            System.out.println("║ 2 - Depositar Valor          ║");
+	            System.out.println("║ 3 - Sacar Valor              ║");
+	            System.out.println("║ 4 - Encerrar Atendimento     ║");
 	            System.out.println("╚══════════════════════════════╝");
 	            System.out.print("Digite a opção desejada: ");
 
 	            int opcao = entrada.nextInt();
 
 	            switch (opcao) {
-	                case 1:
+	                case 1: 
 	                    System.out.printf("\n Seu saldo atual é: R$ %.2f\n", saldo);
 	                    break;
 
@@ -48,7 +48,7 @@ public class SimuladorBancario {
 	                    } else if (valorSaque > saldo) {
 	                        System.out.println(" Saldo insuficiente.");
 	                    } else {
-	                        System.out.println(" Valor inválido.");
+	                        System.out.println(" Valor inválido."):
 	                    }
 	                    break;
 
