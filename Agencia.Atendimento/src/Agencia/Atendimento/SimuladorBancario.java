@@ -40,7 +40,7 @@ public class SimuladorBancario {
 	                    break;
 
 	                case 3:
-	                    System.out.print("\n🏧 Valor para saque: R$ ");
+	                    System.out.print("\n Valor para saque: R$ ");
 	                    double valorSaque = entrada.nextDouble();
 	                    if (valorSaque > 0 && valorSaque <= saldo) {
 	                        saldo -= valorSaque;
@@ -48,7 +48,7 @@ public class SimuladorBancario {
 	                    } else if (valorSaque > saldo) {
 	                        System.out.println(" Saldo insuficiente.");
 	                    } else {
-	                        System.out.println(" Valor inválido."):
+	                        System.out.println(" Valor inválido.");
 	                    }
 	                    break;
 
