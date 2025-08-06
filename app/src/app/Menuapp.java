@@ -45,7 +45,7 @@ public class Menuapp {
                     System.out.println("Encerrando o programa...");
                     break;
                 default:
-                    System.out.println("Opção inválida! Tente novamente.");
+                    System.out.println("Opção inválida!Tente novamente.");
             }
 
         /* 13. Repete enquanto a opção for diferente de 3 */
