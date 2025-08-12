@@ -4,21 +4,23 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ClienteDAO dao = new ClienteDAO();
 
         while (true) {
             System.out.println("\n===== MENU =====");
-            System.out.println("1 - Cadastrar Cliente");
-            System.out.println("2 - Listar Clientes");
-            System.out.println("3 - Atualizar Cliente");
-            System.out.println("4 - Deletar Cliente");
+            System.out.println("1 - Cadastrar cliente");
+            System.out.println("2 - Listar clientes");
+            System.out.println("3 - Atualizar cliente");
+            System.out.println("4 - Deletar cliente");
+            System.out.println("5 - Reindexar IDs dos clientes"); // <- Nova opção
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
             int opcao = sc.nextInt();
-            sc.nextLine(); // Limpar buffer
+            sc.nextLine(); // Limpa o buffer do scanner
 
             switch (opcao) {
                 case 1:
@@ -26,53 +28,55 @@ public class Main {
                     String nome = sc.nextLine();
                     System.out.print("Email: ");
                     String email = sc.nextLine();
-
-                    if (nome.isEmpty() || email.isEmpty()) {
-                        System.out.println("Nome e email não podem ser vazios!");
-                        break;
+                    if (nome.trim().isEmpty() || email.trim().isEmpty()) {
+                        System.out.println("Nome e email não podem ser vazios. Tente novamente.");
+                    } else {
+                        Cliente cliente = new Cliente(nome, email);
+                        dao.inserir(cliente);
                     }
-
-                    dao.inserir(new Cliente(nome, email));
                     break;
-
                 case 2:
                     List<Cliente> clientes = dao.listarClientes();
-                    System.out.println("\n--- Lista de Clientes ---");
-                    for (Cliente c : clientes) {
-                        System.out.println(c);
+                    if (clientes.isEmpty()) {
+                        System.out.println("Nenhum cliente cadastrado.");
+                    } else {
+                        System.out.println("===== Lista de Clientes =====");
+                        for (Cliente c : clientes) {
+                            System.out.printf("ID: %d | Nome: %s | Email: %s%n", c.getId(), c.getNome(), c.getEmail());
+                        }
                     }
                     break;
-
                 case 3:
                     System.out.print("ID do cliente para atualizar: ");
                     int idAtualizar = sc.nextInt();
-                    sc.nextLine(); // Limpar buffer
+                    sc.nextLine();
                     System.out.print("Novo nome: ");
                     String novoNome = sc.nextLine();
                     System.out.print("Novo email: ");
                     String novoEmail = sc.nextLine();
-
-                    if (novoNome.isEmpty() || novoEmail.isEmpty()) {
-                        System.out.println("Nome e email não podem ser vazios!");
-                        break;
+                    if (novoNome.trim().isEmpty() || novoEmail.trim().isEmpty()) {
+                        System.out.println("Nome e email não podem ser vazios. Tente novamente.");
+                    } else {
+                        Cliente clienteAtualizar = new Cliente(idAtualizar, novoNome, novoEmail);
+                        dao.atualizar(clienteAtualizar);
                     }
-
-                    dao.atualizar(new Cliente(idAtualizar, novoNome, novoEmail));
                     break;
-
                 case 4:
                     System.out.print("ID do cliente para deletar: ");
                     int idDeletar = sc.nextInt();
+                    sc.nextLine();
                     dao.deletar(idDeletar);
                     break;
-
+                case 5:
+                    dao.reindexarIds(); // <- Chamada para a nova função
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     sc.close();
                     return;
-
                 default:
                     System.out.println("Opção inválida!");
+                    break;
             }
         }
     }
