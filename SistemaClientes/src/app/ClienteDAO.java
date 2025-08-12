@@ -12,6 +12,7 @@ public class ClienteDAO {
     // Inserir novo cliente
     public void inserir(Cliente cliente) {
         String sql = "INSERT INTO clientes (nome, email) VALUES (?, ?)";
+
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -53,6 +54,7 @@ public class ClienteDAO {
     // Atualizar cliente existente
     public void atualizar(Cliente cliente) {
         String sql = "UPDATE clientes SET nome=?, email=? WHERE id=?";
+
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -71,6 +73,7 @@ public class ClienteDAO {
     // Deletar cliente por ID
     public void deletar(int id) {
         String sql = "DELETE FROM clientes WHERE id=?";
+
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

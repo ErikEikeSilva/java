@@ -18,7 +18,7 @@ public class Main {
             System.out.print("Escolha uma opção: ");
 
             int opcao = sc.nextInt();
-            sc.nextLine(); // limpar buffer
+            sc.nextLine(); // Limpar buffer
 
             switch (opcao) {
                 case 1:
@@ -26,28 +26,38 @@ public class Main {
                     String nome = sc.nextLine();
                     System.out.print("Email: ");
                     String email = sc.nextLine();
-                  
-                    Cliente cliente = new Cliente(nome, email);
-                    dao.inserir(cliente);
+
+                    if (nome.isEmpty() || email.isEmpty()) {
+                        System.out.println("Nome e email não podem ser vazios!");
+                        break;
+                    }
+
+                    dao.inserir(new Cliente(nome, email));
                     break;
 
                 case 2:
                     List<Cliente> clientes = dao.listarClientes();
                     System.out.println("\n--- Lista de Clientes ---");
                     for (Cliente c : clientes) {
-                        System.out.println(c.getId() + " - " + c.getNome() + " (" + c.getEmail() + ")");
+                        System.out.println(c);
                     }
                     break;
 
                 case 3:
                     System.out.print("ID do cliente para atualizar: ");
                     int idAtualizar = sc.nextInt();
-                    sc.nextLine(); // limpar buffer
+                    sc.nextLine(); // Limpar buffer
                     System.out.print("Novo nome: ");
                     String novoNome = sc.nextLine();
                     System.out.print("Novo email: ");
                     String novoEmail = sc.nextLine();
-                    
+
+                    if (novoNome.isEmpty() || novoEmail.isEmpty()) {
+                        System.out.println("Nome e email não podem ser vazios!");
+                        break;
+                    }
+
+                    dao.atualizar(new Cliente(idAtualizar, novoNome, novoEmail));
                     break;
 
                 case 4:
