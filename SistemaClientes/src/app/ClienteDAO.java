@@ -77,39 +77,38 @@ public class ClienteDAO {
     // NOVA FUNÇÃO: Reindexa todos os IDs dos clientes
     public void reindexarIds() {
         try (Connection conn = Conexao.getConnection()) {
-            conn.setAutoCommit(false); // Inicia uma transação
+            conn.setAutoCommit(false); 
 
-            // 1. Pega todos os clientes
+           
             List<Cliente> clientes = listarClientes();
             
-            // 2. Deleta todos os clientes da tabela
+            
             try (PreparedStatement stmtDelete = conn.prepareStatement("DELETE FROM clientes")) {
                 stmtDelete.executeUpdate();
             }
 
-            // 3. Reseta o contador de auto-incremento do MySQL
+           
             try (PreparedStatement stmtReset = conn.prepareStatement("ALTER TABLE clientes AUTO_INCREMENT = 1")) {
                 stmtReset.executeUpdate();
             }
 
-            // 4. Reinserir todos os clientes
+           
             String sqlInsert = "INSERT INTO clientes (nome, email) VALUES (?, ?)";
             try (PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert)) {
                 for (Cliente cliente : clientes) {
                     stmtInsert.setString(1, cliente.getNome());
                     stmtInsert.setString(2, cliente.getEmail());
-                    stmtInsert.addBatch(); // Adiciona ao lote para otimizar
+                    stmtInsert.addBatch(); 
                 }
-                stmtInsert.executeBatch(); // Executa todas as inserções
+                stmtInsert.executeBatch(); 
             }
 
-            conn.commit(); // Confirma a transação
+            conn.commit();
             System.out.println("IDs dos clientes foram reindexados com sucesso!");
 
         } catch (SQLException e) {
             System.err.println("Erro ao reindexar IDs: " + e.getMessage());
-            // Em caso de erro, reverte todas as operações
-            // try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); } 
+            
         }
     }
 }

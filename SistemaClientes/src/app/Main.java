@@ -15,7 +15,7 @@ public class Main {
             System.out.println("2 - Listar clientes");
             System.out.println("3 - Atualizar cliente");
             System.out.println("4 - Deletar cliente");
-            System.out.println("5 - Reindexar IDs dos clientes"); // <- Nova opção
+            System.out.println("5 - Reindexar IDs dos clientes"); 
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -68,7 +68,7 @@ public class Main {
                     dao.deletar(idDeletar);
                     break;
                 case 5:
-                    dao.reindexarIds(); // <- Chamada para a nova função
+                    dao.reindexarIds(); 
                     break;
                 case 0:
                     System.out.println("Saindo...");
